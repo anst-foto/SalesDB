@@ -1,0 +1,15 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SalesDB.Desktop.ViewModels"
+
+        x:Class="SalesDB.Desktop.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+
+        Icon="/Assets/avalonia-logo.ico"
+        Title="SalesDB.Desktop">
+
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+
+</Window>
