@@ -41,33 +41,62 @@ public class SalesDataBase : ISalesRepository
 
     public bool AddSale(Sale sale)
     {
-        _db.Open();
+        try
+        {
+            _db.Open();
 
-        var sql = $"""
-                    INSERT INTO table_sales(product_id, date, amount)
-                    VALUES ({sale.ProductId}, '{sale.Date}', {sale.Amount})
-                """;
-        var command = new NpgsqlCommand(sql, _db);
-        var result = command.ExecuteNonQuery();
+            var sql = $"""
+                           INSERT INTO table_sales(product_id, date, amount)
+                           VALUES ({sale.ProductId}, '{sale.Date}', {sale.Amount})
+                       """;
+            var command = new NpgsqlCommand(sql, _db);
+            var result = command.ExecuteNonQuery();
 
-        _db.Close();
-
-        return result > 0;
+            return result > 0;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+        finally
+        {
+            _db.Close();
+        }
     }
 
     public bool AddProduct(Product product)
     {
+        try
+        {
+            _db.Open();
+
+            var sql = $"""
+                           INSERT INTO table_products(name, price)
+                           VALUES ('{product.Name}', {product.Price})
+                       """;
+            var command = new NpgsqlCommand(sql, _db);
+            var result = command.ExecuteNonQuery();
+
+            return result > 0;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+        finally
+        {
+            _db.Close();
+        }
+    }
+
+    public void DeleteProduct(string productName)
+    {
         _db.Open();
 
-        var sql = $"""
-                       INSERT INTO table_products(name, price)
-                       VALUES ('{product.Name}', {product.Price})
-                   """;
+        var sql = $"CALL procedure_delete_product('{productName}')";
         var command = new NpgsqlCommand(sql, _db);
-        var result = command.ExecuteNonQuery();
+        command.ExecuteNonQuery();
 
         _db.Close();
-
-        return result > 0;
     }
 }
