@@ -9,6 +9,7 @@ public class SalesDataBase : ISalesRepository
 
     public SalesDataBase()
     {
+        //BUG
         const string connectionString = "Server=127.0.0.1;Port=5432;Database=sales_db;User Id=postgres;Password=1234;SearchPath=test;";
         _db = new NpgsqlConnection(connectionString);
     }
@@ -45,6 +46,7 @@ public class SalesDataBase : ISalesRepository
         {
             _db.Open();
 
+            //BUG
             var sql = $"""
                            INSERT INTO table_sales(product_id, date, amount)
                            VALUES ({sale.ProductId}, '{sale.Date}', {sale.Amount})
@@ -70,6 +72,7 @@ public class SalesDataBase : ISalesRepository
         {
             _db.Open();
 
+            //BUG
             var sql = $"""
                            INSERT INTO table_products(name, price)
                            VALUES ('{product.Name}', {product.Price})
@@ -93,7 +96,20 @@ public class SalesDataBase : ISalesRepository
     {
         _db.Open();
 
+        //BUG
         var sql = $"CALL procedure_delete_product('{productName}')";
+        var command = new NpgsqlCommand(sql, _db);
+        command.ExecuteNonQuery();
+
+        _db.Close();
+    }
+
+    public void DeleteSale(int id)
+    {
+        _db.Open();
+
+        //BUG
+        var sql = $"CALL procedure_delete_sale({id})";
         var command = new NpgsqlCommand(sql, _db);
         command.ExecuteNonQuery();
 
