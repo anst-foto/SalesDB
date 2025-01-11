@@ -37,3 +37,11 @@ INSERT INTO table_sales (product_id, date, amount)
 VALUES (1, '2020-01-01', 10),
        (2, '2020-01-02', 20),
        (3, '2020-01-03', 30);
+
+CREATE PROCEDURE procedure_delete_product(IN product_name TEXT)
+    LANGUAGE SQL
+AS $$
+    DELETE FROM table_products WHERE name = product_name;
+$$;
+
+-- CALL procedure_delete_product('product_4');
