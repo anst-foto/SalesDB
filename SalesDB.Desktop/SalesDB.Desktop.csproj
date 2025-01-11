@@ -18,11 +18,20 @@
         <PackageReference Include="Avalonia.Desktop" Version="11.*"/>
         <PackageReference Include="Avalonia.Themes.Fluent" Version="11.*"/>
         <PackageReference Include="Avalonia.Fonts.Inter" Version="11.*"/>
-        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+      <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.*" />
+
+      <PackageReference Include="Avalonia.ReactiveUI" Version="11.*"/>
+      <PackageReference Include="ReactiveUI.Fody" Version="19.*" />
+
+      <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
         <PackageReference Include="Avalonia.Diagnostics" Version="11.*">
             <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
             <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="Avalonia.ReactiveUI" Version="11.*"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\SalesDB.BL\SalesDB.BL.csproj" />
+      <ProjectReference Include="..\SalesDB.Models\SalesDB.Models.csproj" />
     </ItemGroup>
 </Project>
