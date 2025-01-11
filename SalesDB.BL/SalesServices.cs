@@ -7,9 +7,9 @@ public class SalesServices : IServices
 {
     private readonly ISalesRepository _db;
 
-    public SalesServices(ISalesRepository db)
+    public SalesServices()
     {
-        _db = db;
+        _db = new SalesDataBase();
     }
 
     public IEnumerable<Sales> GetAllSales()
