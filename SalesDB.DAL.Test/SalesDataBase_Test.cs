@@ -76,5 +76,38 @@ namespace SalesDB.DAL.Test
 
             Assert.True(result);
         }
+
+        [Fact]
+        public void AddSale_NegativeTest()
+        {
+            var db = new SalesDataBase();
+            var result = db.AddSale(
+                new Sale()
+            {
+        ProductId = 1,
+        Amount = -1,
+        Date = DateTime.Now
+            });
+
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void AddSale_PositiveTest()
+        {
+            const int id = 1;
+
+            var db = new SalesDataBase();
+            var result = db.AddSale(
+                new Sale()
+                {
+                    ProductId = id,
+                    Amount = 1,
+                    Date = DateTime.Now
+                });
+            db.DeleteSale(id);
+
+            Assert.True(result);
+        }
     }
 }
