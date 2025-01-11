@@ -44,4 +44,18 @@ AS $$
     DELETE FROM table_products WHERE name = product_name;
 $$;
 
+CREATE PROCEDURE procedure_delete_sale(IN product_id_ INTEGER)
+    LANGUAGE SQL
+AS $$
+DELETE FROM table_sales
+    WHERE id in (
+        SELECT id
+        FROM table_sales
+        WHERE product_id = product_id_
+        ORDER BY date DESC
+        LIMIT 1
+    );
+$$;
+
 -- CALL procedure_delete_product('product_4');
+-- CALL procedure_delete_sale(1);
