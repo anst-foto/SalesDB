@@ -1,11 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesDB.Desktop", "SalesDB.Desktop\SalesDB.Desktop.csproj", "{45BE790A-D8D8-42FD-8D74-31B540E4293E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{6491F372-1B1C-4C96-A15E-9413516299EF}"
 	ProjectSection(SolutionItems) = preProject
-		.gitignore = .gitignore
 		.editorconfig = .editorconfig
+		.gitignore = .gitignore
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -14,6 +17,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesDB.Models", "SalesDB.Models\SalesDB.Models.csproj", "{01C760CD-5231-47AA-9232-EE18A3C190E9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesDB.DAL", "SalesDB.DAL\SalesDB.DAL.csproj", "{DEF44D7F-CFF9-45C3-B5CA-B3DF6539D65F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesDB.DAL.Test", "SalesDB.DAL.Test\SalesDB.DAL.Test.csproj", "{B4615A63-0197-455D-B246-7990D121E530}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,5 +42,12 @@ Global
 		{DEF44D7F-CFF9-45C3-B5CA-B3DF6539D65F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEF44D7F-CFF9-45C3-B5CA-B3DF6539D65F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEF44D7F-CFF9-45C3-B5CA-B3DF6539D65F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4615A63-0197-455D-B246-7990D121E530}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4615A63-0197-455D-B246-7990D121E530}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4615A63-0197-455D-B246-7990D121E530}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4615A63-0197-455D-B246-7990D121E530}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
