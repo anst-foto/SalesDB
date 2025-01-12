@@ -44,12 +44,14 @@ public class SalesDataBase : ISalesRepository
         {
             _db.Open();
 
-            //BUG
-            var sql = $"""
-                           INSERT INTO table_sales(product_id, date, amount)
-                           VALUES ({sale.ProductId}, '{sale.Date}', {sale.Amount})
-                       """;
+            const string sql = """
+                                    INSERT INTO table_sales(product_id, date, amount)
+                                    VALUES (@ProductId, @Date, @Amount)
+                                """;
             var command = new NpgsqlCommand(sql, _db);
+            command.Parameters.AddWithValue("@ProductId", sale.ProductId);
+            command.Parameters.AddWithValue("@Date", sale.Date);
+            command.Parameters.AddWithValue("@Amount", sale.Amount);
             var result = command.ExecuteNonQuery();
 
             return result > 0;
@@ -70,12 +72,13 @@ public class SalesDataBase : ISalesRepository
         {
             _db.Open();
 
-            //BUG
-            var sql = $"""
-                           INSERT INTO table_products(name, price)
-                           VALUES ('{product.Name}', {product.Price})
-                       """;
+            const string sql = """
+                                    INSERT INTO table_products(name, price)
+                                    VALUES (@Name, @Price)
+                                """;
             var command = new NpgsqlCommand(sql, _db);
+            command.Parameters.AddWithValue("@Name", product.Name);
+            command.Parameters.AddWithValue("@Price", product.Price);
             var result = command.ExecuteNonQuery();
 
             return result > 0;
@@ -94,9 +97,9 @@ public class SalesDataBase : ISalesRepository
     {
         _db.Open();
 
-        //BUG
-        var sql = $"CALL procedure_delete_product('{productName}')";
+        const string sql = "CALL procedure_delete_product(@ProductName)";
         var command = new NpgsqlCommand(sql, _db);
+        command.Parameters.AddWithValue("@ProductName", productName);
         command.ExecuteNonQuery();
 
         _db.Close();
@@ -106,9 +109,9 @@ public class SalesDataBase : ISalesRepository
     {
         _db.Open();
 
-        //BUG
-        var sql = $"CALL procedure_delete_sale({id})";
+        const string sql = "CALL procedure_delete_sale(@Id)";
         var command = new NpgsqlCommand(sql, _db);
+        command.Parameters.AddWithValue("@Id", id);
         command.ExecuteNonQuery();
 
         _db.Close();
