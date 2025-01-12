@@ -37,7 +37,11 @@ public class MainWindowViewModel : ViewModelBase
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json")
             .Build()
+            #if DEBUG
             .GetConnectionString("ConnectionToTestDB");
+            #elif RELEASE
+            .GetConnectionString("ConnectionToPublicDB");
+            #endif
 
         _salesServices = new SalesServices(connectionString);
 
