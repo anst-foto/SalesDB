@@ -53,11 +53,6 @@ namespace SalesDB.DAL.Test;
         {
             var actual = _db.GetAllSales().ToList();
 
-            /*Assert.Multiple(
-                () => Assert.Equal(expected.Count, actual.Count),
-                () => Assert.Equal(expected[0], actual[0]),
-                () => Assert.Equal(expected[1], actual[1]),
-                () => Assert.Equal(expected[2], actual[2]));*/
             Assert.Equal(_salesList, actual);
         }
 
@@ -119,4 +114,3 @@ namespace SalesDB.DAL.Test;
             Assert.True(result);
         }
     }
-
