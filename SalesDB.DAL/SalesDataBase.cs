@@ -7,10 +7,10 @@ public class SalesDataBase : ISalesRepository
 {
     private readonly NpgsqlConnection _db;
 
-    public SalesDataBase()
+    public SalesDataBase(string connectionString)
     {
-        //BUG
-        const string connectionString = "Server=127.0.0.1;Port=5432;Database=sales_db;User Id=postgres;Password=1234;SearchPath=test;";
+        /*//BUG
+        const string connectionString = "";*/
         _db = new NpgsqlConnection(connectionString);
     }
 

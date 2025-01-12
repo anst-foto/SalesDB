@@ -1,7 +1,8 @@
+using Microsoft.Extensions.Configuration;
 using SalesDB.Models;
 
-namespace SalesDB.DAL.Test
-{
+namespace SalesDB.DAL.Test;
+
     public class SalesDataBase_Test
     {
         private readonly List<Sales> _salesList =
@@ -34,11 +35,23 @@ namespace SalesDB.DAL.Test
             }
         ];
 
+        private readonly SalesDataBase _db;
+
+        public SalesDataBase_Test()
+        {
+            var connectionString = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build()
+                .GetConnectionString("ConnectionToTestDB");
+
+            _db = new SalesDataBase(connectionString);
+        }
+
         [Fact]
         public void GetAllSales_Test()
         {
-            var db = new SalesDataBase();
-            var actual = db.GetAllSales().ToList();
+            var actual = _db.GetAllSales().ToList();
 
             /*Assert.Multiple(
                 () => Assert.Equal(expected.Count, actual.Count),
@@ -51,8 +64,7 @@ namespace SalesDB.DAL.Test
         [Fact]
         public void AddProduct_NegativeTest()
         {
-            var db = new SalesDataBase();
-            var result = db.AddProduct(new Product()
+            var result = _db.AddProduct(new Product()
             {
                 Name = "product_1",
                 Price = 10
@@ -66,13 +78,12 @@ namespace SalesDB.DAL.Test
         {
             const string productName = "product";
 
-            var db = new SalesDataBase();
-            var result = db.AddProduct(new Product()
+            var result = _db.AddProduct(new Product()
             {
                 Name = productName,
                 Price = 1
             });
-            db.DeleteProduct(productName);
+            _db.DeleteProduct(productName);
 
             Assert.True(result);
         }
@@ -80,8 +91,7 @@ namespace SalesDB.DAL.Test
         [Fact]
         public void AddSale_NegativeTest()
         {
-            var db = new SalesDataBase();
-            var result = db.AddSale(
+            var result = _db.AddSale(
                 new Sale()
             {
         ProductId = 1,
@@ -97,17 +107,16 @@ namespace SalesDB.DAL.Test
         {
             const int id = 1;
 
-            var db = new SalesDataBase();
-            var result = db.AddSale(
+            var result = _db.AddSale(
                 new Sale()
                 {
                     ProductId = id,
                     Amount = 1,
                     Date = DateTime.Now
                 });
-            db.DeleteSale(id);
+            _db.DeleteSale(id);
 
             Assert.True(result);
         }
     }
-}
+
