@@ -9,70 +9,69 @@
         Title="SalesDB.Desktop">
 
     <Window.DataContext>
-        <vm:MainWindowViewModel/>
+        <vm:MainWindowViewModel />
     </Window.DataContext>
 
     <DockPanel LastChildFill="True">
         <StackPanel Orientation="Horizontal"
                     DockPanel.Dock="Top">
             <Button Content="Refresh"
-                    Command="{Binding CommandRefresh}"/>
+                    Command="{Binding CommandRefresh}" />
             <Button Content="Add product"
-                    Command="{Binding CommandAddProduct}"/>
+                    Command="{Binding CommandAddProduct}" />
             <Button Content="Add sale"
-                    Command="{Binding CommandAddSale}"/>
+                    Command="{Binding CommandAddSale}" />
         </StackPanel>
 
         <StackPanel IsVisible="{Binding IsFormAddProduct}"
                     DockPanel.Dock="Top">
             <StackPanel Orientation="Horizontal">
                 <Label Content="Name"
-                       Target="{Binding ElementName=InputProductName}"/>
+                       Target="{Binding ElementName=InputProductName}" />
                 <TextBox x:Name="InputProductName"
-                         Text="{Binding ProductName}"/>
+                         Text="{Binding ProductName}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Price"
-                       Target="{Binding ElementName=InputProductPrice}"/>
+                       Target="{Binding ElementName=InputProductPrice}" />
                 <TextBox x:Name="InputProductPrice"
-                         Text="{Binding ProductPrice}"/>
+                         Text="{Binding ProductPrice}" />
             </StackPanel>
 
             <Button Content="Save"
                     Command="{Binding CommandSave}"
-                    CommandParameter="AddProduct"/>
+                    CommandParameter="AddProduct" />
         </StackPanel>
 
         <StackPanel IsVisible="{Binding IsFormAddSale}"
                     DockPanel.Dock="Top">
             <StackPanel Orientation="Horizontal">
                 <Label Content="ProductId"
-                       Target="{Binding ElementName=InputSaleProductId}"/>
+                       Target="{Binding ElementName=InputSaleProductId}" />
                 <TextBox x:Name="InputSaleProductId"
-                         Text="{Binding SaleProductId}"/>
+                         Text="{Binding SaleProductId}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Amount"
-                       Target="{Binding ElementName=InputSaleAmount}"/>
+                       Target="{Binding ElementName=InputSaleAmount}" />
                 <TextBox x:Name="InputSaleAmount"
-                         Text="{Binding SaleAmount}"/>
+                         Text="{Binding SaleAmount}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Date"
-                       Target="{Binding ElementName=InputSaleDate}"/>
+                       Target="{Binding ElementName=InputSaleDate}" />
                 <TextBox x:Name="InputSaleDate"
-                         Text="{Binding SaleDate}"/>
+                         Text="{Binding SaleDate}" />
             </StackPanel>
 
             <Button Content="Save"
                     Command="{Binding CommandSave}"
-                    CommandParameter="AddSale"/>
+                    CommandParameter="AddSale" />
         </StackPanel>
 
         <DataGrid ItemsSource="{Binding Sales}"
                   AutoGenerateColumns="True"
                   IsReadOnly="True"
-                  GridLinesVisibility="All">
-        </DataGrid>
+                  GridLinesVisibility="All" />
     </DockPanel>
 </Window>

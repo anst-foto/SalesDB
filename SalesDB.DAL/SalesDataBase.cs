@@ -11,7 +11,7 @@ public class SalesDataBase : ISalesRepository
     public SalesDataBase(string connectionString)
     {
         _db = new NpgsqlConnection(connectionString);
-        Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+        DefaultTypeMap.MatchNamesWithUnderscores = true;
     }
 
     public IEnumerable<Sales> GetAllSales()
@@ -33,9 +33,9 @@ public class SalesDataBase : ISalesRepository
             _db.Open();
 
             const string sql = """
-                                    INSERT INTO table_sales(product_id, date, amount)
-                                    VALUES (@ProductId, @Date, @Amount)
-                                """;
+                                   INSERT INTO table_sales(product_id, date, amount)
+                                   VALUES (@ProductId, @Date, @Amount)
+                               """;
             var result = _db.Execute(sql, new { sale.ProductId, sale.Date, sale.Amount });
 
             return result > 0;
@@ -57,10 +57,10 @@ public class SalesDataBase : ISalesRepository
             _db.Open();
 
             const string sql = """
-                                    INSERT INTO table_products(name, price)
-                                    VALUES (@Name, @Price)
-                                """;
-            var result = _db.Execute(sql, new {product.Name, product.Price});
+                                   INSERT INTO table_products(name, price)
+                                   VALUES (@Name, @Price)
+                               """;
+            var result = _db.Execute(sql, new { product.Name, product.Price });
 
             return result > 0;
         }
@@ -79,7 +79,7 @@ public class SalesDataBase : ISalesRepository
         _db.Open();
 
         const string sql = "CALL procedure_delete_product(@ProductName)";
-        _db.Execute(sql, new {productName});
+        _db.Execute(sql, new { productName });
 
         _db.Close();
     }
@@ -89,7 +89,7 @@ public class SalesDataBase : ISalesRepository
         _db.Open();
 
         const string sql = "CALL procedure_delete_sale(@Id)";
-        _db.Execute(sql, new {id});
+        _db.Execute(sql, new { id });
 
         _db.Close();
     }

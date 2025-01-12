@@ -1,4 +1,5 @@
 ﻿# Untitled Diagram documentation
+
 ## Summary
 
 - [Introduction](#introduction)
@@ -14,26 +15,25 @@
 ## Database type
 
 - **Database system:** PostgreSQL
+
 ## Table structure
 
 ### table_products
 
-| Name        | Type          | Settings                      | References                    | Note                           |
-|-------------|---------------|-------------------------------|-------------------------------|--------------------------------|
-| **id** | SERIAL | 🔑 PK, not null  |  | |
-| **name** | TEXT | not null , unique |  | |
-| **price** | DECIMAL | not null  |  | | 
-
+| Name      | Type    | Settings          | References | Note |
+|-----------|---------|-------------------|------------|------|
+| **id**    | SERIAL  | 🔑 PK, not null   |            |      |
+| **name**  | TEXT    | not null , unique |            |      |
+| **price** | DECIMAL | not null          |            |      | 
 
 ### table_sales
 
-| Name        | Type          | Settings                      | References                    | Note                           |
-|-------------|---------------|-------------------------------|-------------------------------|--------------------------------|
-| **id** | BIGSERIAL | 🔑 PK, not null  |  | |
-| **product_id** | INTEGER | not null  | table_sales_product_id_fk | |
-| **date** | DATE | not null , default: CURRENT_DATE |  | |
-| **amount** | SMALLINT | not null , default: 1 |  | | 
-
+| Name           | Type      | Settings                         | References                | Note |
+|----------------|-----------|----------------------------------|---------------------------|------|
+| **id**         | BIGSERIAL | 🔑 PK, not null                  |                           |      |
+| **product_id** | INTEGER   | not null                         | table_sales_product_id_fk |      |
+| **date**       | DATE      | not null , default: CURRENT_DATE |                           |      |
+| **amount**     | SMALLINT  | not null , default: 1            |                           |      | 
 
 ## Relationships
 

@@ -14,7 +14,8 @@ public class Sales : IEquatable<Sales>
     {
         if (other is null) return false;
         if (ReferenceEquals(this, other)) return true;
-        return Id == other.Id && Date.Equals(other.Date) && ProductName == other.ProductName && Amount == other.Amount && Price == other.Price;
+        return Id == other.Id && Date.Equals(other.Date) && ProductName == other.ProductName &&
+               Amount == other.Amount && Price == other.Price;
     }
 
     public override bool Equals(object? obj)

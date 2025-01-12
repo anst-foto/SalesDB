@@ -37,11 +37,11 @@ public class MainWindowViewModel : ViewModelBase
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json")
             .Build()
-            #if DEBUG
+#if DEBUG
             .GetConnectionString("ConnectionToTestDB");
-            #elif RELEASE
+#elif RELEASE
             .GetConnectionString("ConnectionToPublicDB");
-            #endif
+#endif
 
         _salesServices = new SalesServices(connectionString);
 
@@ -51,17 +51,17 @@ public class MainWindowViewModel : ViewModelBase
 
         CommandRefresh = ReactiveCommand.Create(Refresh);
 
-        CommandAddSale = ReactiveCommand.Create((() =>
+        CommandAddSale = ReactiveCommand.Create(() =>
         {
             IsFormAddSale = true;
             IsFormAddProduct = false;
-        }));
+        });
 
-        CommandAddProduct = ReactiveCommand.Create((() =>
+        CommandAddProduct = ReactiveCommand.Create(() =>
         {
             IsFormAddSale = false;
             IsFormAddProduct = true;
-        }));
+        });
 
         CommandSave = ReactiveCommand.Create<string, Unit>(Save);
     }
@@ -71,10 +71,7 @@ public class MainWindowViewModel : ViewModelBase
         Sales.Clear();
 
         var sales = _salesServices.GetAllSales();
-        foreach (var sale in sales)
-        {
-            Sales.Add(sale);
-        }
+        foreach (var sale in sales) Sales.Add(sale);
     }
 
     private Unit Save(string name)
@@ -100,6 +97,7 @@ public class MainWindowViewModel : ViewModelBase
                 Refresh();
                 break;
         }
+
         return new Unit();
     }
 }
