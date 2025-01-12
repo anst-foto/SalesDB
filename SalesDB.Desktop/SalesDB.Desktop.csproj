@@ -21,6 +21,8 @@
       <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.*" />
 
       <PackageReference Include="Avalonia.ReactiveUI" Version="11.*"/>
+
+      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.0" />
       <PackageReference Include="ReactiveUI.Fody" Version="19.*" />
 
       <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
@@ -33,5 +35,11 @@
     <ItemGroup>
       <ProjectReference Include="..\SalesDB.BL\SalesDB.BL.csproj" />
       <ProjectReference Include="..\SalesDB.Models\SalesDB.Models.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="appsettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 </Project>

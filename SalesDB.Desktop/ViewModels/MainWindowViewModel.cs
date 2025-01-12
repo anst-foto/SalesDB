@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Reactive;
+using Microsoft.Extensions.Configuration;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using SalesDB.BL;
@@ -10,6 +12,8 @@ namespace SalesDB.Desktop.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
+    private readonly SalesServices _salesServices;
+
     public ObservableCollection<Sales> Sales { get; } = [];
 
     [Reactive] public string ProductName { get; set; }
@@ -29,6 +33,14 @@ public class MainWindowViewModel : ViewModelBase
 
     public MainWindowViewModel()
     {
+        var connectionString = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json")
+            .Build()
+            .GetConnectionString("ConnectionToTestDB");
+
+        _salesServices = new SalesServices(connectionString);
+
         Refresh();
         IsFormAddProduct = false;
         IsFormAddSale = false;
@@ -54,8 +66,7 @@ public class MainWindowViewModel : ViewModelBase
     {
         Sales.Clear();
 
-        var salesServices = new SalesServices();
-        var sales = salesServices.GetAllSales();
+        var sales = _salesServices.GetAllSales();
         foreach (var sale in sales)
         {
             Sales.Add(sale);
@@ -64,12 +75,10 @@ public class MainWindowViewModel : ViewModelBase
 
     private Unit Save(string name)
     {
-        var salesServices = new SalesServices();
-
         switch (name)
         {
             case "AddProduct":
-                salesServices.AddProduct(new Product()
+                _salesServices.AddProduct(new Product()
                 {
                     Name = ProductName,
                     Price = ProductPrice
@@ -78,7 +87,7 @@ public class MainWindowViewModel : ViewModelBase
                 break;
 
             case "AddSale":
-                salesServices.AddSale(new Sale()
+                _salesServices.AddSale(new Sale()
                 {
                     ProductId = SaleProductId,
                     Amount = SaleAmount,
