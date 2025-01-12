@@ -9,8 +9,6 @@ public class SalesDataBase : ISalesRepository
 
     public SalesDataBase(string connectionString)
     {
-        /*//BUG
-        const string connectionString = "";*/
         _db = new NpgsqlConnection(connectionString);
     }
 
